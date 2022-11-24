@@ -3,12 +3,12 @@ const router = express.Router();
 
 
 router.get('/users/signin', (req, res) =>{
-      res.render('users/signin');
+      res.send('ingresar app');
 
 });
 
-router.get('/users/signup', (req, res) =>{
-  res.render('users/signup');
+router.get('/users', (req, res) =>{
+  res.send('formulario app');
 
 });
 

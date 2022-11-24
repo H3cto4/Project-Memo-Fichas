@@ -1,0 +1,24 @@
+[
+    {
+      "id": "1",
+      "palabra": "want",
+      "tipo": "verbo",
+      "significado": "querer"
+    },
+
+    {
+      "id": "2",
+      "palabra": "although",
+      "tipo": "conjuncion",
+      "significado": "aunque"
+    },
+
+    {
+      "id": "3",
+      "palabra": "computer",
+      "tipo": "sustantivo",
+      "significado": "ordenador"
+    }
+
+
+]

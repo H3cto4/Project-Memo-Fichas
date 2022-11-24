@@ -4,13 +4,14 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-Override');
 const session = require('express-session');
 const colors = require('colors');
+const morgan = require('morgan');
 //Inicilización general
 const app = express();
+
 
 //Settings by @hectormolinaweb
 app.set('port', process.env.PORT || 8081);
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, '/public')));
 app.engine('.hbs', exphbs.engine({
   defaultLayout: 'main',
   layoutsDir: path.join(app.get('views'), 'layouts'),
@@ -21,18 +22,12 @@ app.engine('.hbs', exphbs.engine({
 
 }));
 app.set('view engine', '.hbs');
+app.set('json spaces', 2);
 
-
-//Routes
-
-app.use(require('./routes/index'));
-app.use(require('./routes/notes'));
-app.use(require('./routes/users'));
 
 
 //Middleware
-app.use(express.urlencoded({extended: true})); 
-app.use(express.json());
+app.use(express.urlencoded({extended: false})); 
 app.use(methodOverride('_method'));
 app.use(session({
     secret: 'mysecretapp',
@@ -40,13 +35,26 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+//uso de morgan
+app.use(morgan('dev'));
+app.use(express.json());
+
+
+//Routes
+
+app.use(require('./routes/index'));
+app.use('/api/notes', require('./routes/notes'));
+app.use('/api/users',require('./routes/users'));
+
+
+
 //Variables locales
 
 
-
-
-
 //Static files
+app.use(express.static(path.join(__dirname, '/public')));
+
+
 
 
 //Inicialización de server
